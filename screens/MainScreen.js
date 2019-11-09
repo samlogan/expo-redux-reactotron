@@ -8,22 +8,6 @@ import {
 } from 'react-native';
 import { getPosts } from '../actions/posts';
 
-class MainScreen extends Component {
-  componentWillMount() {
-    this.props.getPosts();
-    console.log('Example Console Log');
-  }
-  render() {
-    const { posts } = this.props;
-    return (
-      <View style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        <Text style={styles.textStyle}>Edit screens/MainScreen.js to get started</Text>
-      </View>
-    );
-  }
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -35,6 +19,22 @@ const styles = StyleSheet.create({
     color: '#FFFFFF'
   }
 });
+
+class MainScreen extends Component {
+  componentWillMount() {
+    this.props.getPosts();
+    console.log('Example Console Log');
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <StatusBar barStyle="light-content" />
+        <Text style={styles.textStyle}>Edit screens/MainScreen.js to get started</Text>
+      </View>
+    );
+  }
+}
 
 function mapStateToProps({ posts }) {
   return {

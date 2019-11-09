@@ -3,7 +3,9 @@ import {
   Platform,
   StyleSheet
 } from 'react-native';
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
 import MainScreen from '../screens/MainScreen';
 
 const MainNavigator = createBottomTabNavigator({
@@ -68,7 +70,7 @@ const MainNavigator = createBottomTabNavigator({
   swipeEnabled: false,
 });
 
-export default MainNavigator;
+export default createAppContainer(MainNavigator);
 
 const styles = StyleSheet.create({
   container: {
