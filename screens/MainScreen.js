@@ -23,7 +23,7 @@ const MainScreen = () => {
   useEffect(() => {
     dispatch(getPosts());
     console.log('Example console log from MainScreen.js');
-  });
+  }, []);
 
   const { items } = posts;
 
