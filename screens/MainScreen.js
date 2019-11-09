@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   View,
   StyleSheet,
@@ -16,30 +16,32 @@ const styles = StyleSheet.create({
     backgroundColor: '#005B93'
   },
   textStyle: {
-    color: '#FFFFFF'
+    color: '#FFFFFF',
+    marginBottom: 10,
   }
 });
 
-class MainScreen extends Component {
-  componentWillMount() {
-    this.props.getPosts();
-    console.log('Example Console Log');
-  }
+const MainScreen = () => {
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts);
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        <Text style={styles.textStyle}>Edit screens/MainScreen.js to get started</Text>
+  useEffect(() => {
+    dispatch(getPosts());
+    console.log('Example console log from MainScreen.js');
+  });
+
+  const { items } = posts;
+
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
+      <Text style={styles.textStyle}>Edit screens/MainScreen.js to get started.</Text>
+      <Text style={styles.textStyle}>Using Redux Hooks to fetch dummy posts:</Text>
+      <View>
+        {items.map((post) => <Text key={post} style={styles.textStyle}>{post}</Text>)}
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
 
-function mapStateToProps({ posts }) {
-  return {
-    posts
-  };
-}
-
-export default connect(mapStateToProps, { getPosts })(MainScreen);
+export default MainScreen;
