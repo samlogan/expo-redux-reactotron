@@ -1,20 +1,5 @@
-import React, { Component } from 'react';
-import {
-  View,
-  ActivityIndicator,
-  StyleSheet,
-  Dimensions
-} from 'react-native';
-
-export default class Loading extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator />
-      </View>
-    );
-  }
-}
+import React from 'react';
+import { View, ActivityIndicator, StyleSheet, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -24,6 +9,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F4F4F4'
+    backgroundColor: '#F4F4F4',
   },
 });
+
+const Loading = () => (
+  <View style={styles.container}>
+    <ActivityIndicator />
+  </View>
+);
+
+export default Loading;
