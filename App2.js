@@ -13,16 +13,13 @@ import MainNavigator from './navigators/MainNavigator';
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(
-  rootReducer,
-  composeEnhancer(applyMiddleware(ReduxThunk), Reactotron.createEnhancer())
-);
+const store = createStore(rootReducer, composeEnhancer(applyMiddleware(ReduxThunk), Reactotron.createEnhancer()));
 
-if (__DEV__ ) {
+if (__DEV__) {
   NativeModules.DevSettings.setIsDebuggingRemotely(true);
 }
 
- const App = () => {
+const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
 
   useEffect(() => {
@@ -31,7 +28,7 @@ if (__DEV__ ) {
     const fetchFonts = async () => {
       await Font.loadAsync({
         bodyfont: require('./assets/fonts/Roboto-Regular.ttf'),
-        headerfont: require('./assets/fonts/Roboto-Bold.ttf')
+        headerfont: require('./assets/fonts/Roboto-Bold.ttf'),
       });
       setFontLoaded(true);
     };
@@ -39,7 +36,10 @@ if (__DEV__ ) {
     fetchFonts();
   }, []);
 
-  if (!fontLoaded) return <AppLoading />;
+  if (!fontLoaded) {
+    return <AppLoading />;
+  }
+
   return (
     <Provider store={store}>
       <MainNavigator />
