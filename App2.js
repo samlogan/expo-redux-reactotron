@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NativeModules } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -22,24 +22,29 @@ if (__DEV__ ) {
   NativeModules.DevSettings.setIsDebuggingRemotely(true);
 }
 
-export default class App extends React.Component {
-  state = { fontLoaded: false };
+ const App = () => {
+  const [fontLoaded, setFontLoaded] = useState(false);
 
-  async componentDidMount() {
+  useEffect(() => {
     console.disableYellowBox = true;
-    await Font.loadAsync({
-      bodyfont: require('./assets/fonts/Roboto-Regular.ttf'),
-      headerfont: require('./assets/fonts/Roboto-Bold.ttf')
-    });
-    this.setState({ fontLoaded: true });
-  }
 
-  render() {
-    if (!this.state.fontLoaded) return <AppLoading />;
-    return (
-      <Provider store={store}>
-        <MainNavigator />
-      </Provider>
-    );
-  }
-}
+    const fetchFonts = async () => {
+      await Font.loadAsync({
+        bodyfont: require('./assets/fonts/Roboto-Regular.ttf'),
+        headerfont: require('./assets/fonts/Roboto-Bold.ttf')
+      });
+      setFontLoaded(true);
+    };
+
+    fetchFonts();
+  }, []);
+
+  if (!fontLoaded) return <AppLoading />;
+  return (
+    <Provider store={store}>
+      <MainNavigator />
+    </Provider>
+  );
+};
+
+export default App;
