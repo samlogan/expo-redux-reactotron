@@ -1,16 +1,20 @@
 import React from 'react';
-import {
-  Platform,
-  StyleSheet
-} from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 import MainScreen from '../screens/MainScreen';
 
-const MainNavigator = createBottomTabNavigator({
+const styles = StyleSheet.create({
+  container: {
+    marginTop: Platform.OS === 'ios' ? 20 : 0,
+  },
+});
+
+const MainNavigator = createBottomTabNavigator(
+  {
     main: {
-      screen: MainScreen
+      screen: MainScreen,
       // screen: createBottomTabNavigator({
       //   ScreenOne: {
       //     screen: createStackNavigator({
@@ -61,19 +65,15 @@ const MainNavigator = createBottomTabNavigator({
       //   lazy: true,
       //   tabBarPosition: 'bottom'
       // })
-    }
-  }, {
-  navigationOptions: {
-    tabBarVisible: false
+    },
   },
-  lazy: true,
-  swipeEnabled: false,
-});
+  {
+    navigationOptions: {
+      tabBarVisible: false,
+    },
+    lazy: true,
+    swipeEnabled: false,
+  }
+);
 
 export default createAppContainer(MainNavigator);
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: Platform.OS === 'ios' ? 20 : 0,
-  }
-});
