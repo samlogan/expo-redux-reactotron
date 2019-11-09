@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "@react-native-community"],
+  "extends": "@react-native-community",
   "parser": "babel-eslint",
   "rules": {
     "no-unused-vars": [
