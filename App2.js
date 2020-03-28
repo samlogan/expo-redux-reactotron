@@ -2,22 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { NativeModules } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import Reactotron from 'reactotron-react-native';
 import ReduxThunk from 'redux-thunk';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import rootReducer from './reducers';
-import './ReactotronConfig';
+
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+  NativeModules.DevSettings.setIsDebuggingRemotely(true);
+}
 
 import MainNavigator from './navigators/MainNavigator';
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, composeEnhancer(applyMiddleware(ReduxThunk), Reactotron.createEnhancer()));
-
-if (__DEV__) {
-  NativeModules.DevSettings.setIsDebuggingRemotely(true);
-}
+const store = createStore(rootReducer, composeEnhancer(applyMiddleware(ReduxThunk)));
 
 const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
