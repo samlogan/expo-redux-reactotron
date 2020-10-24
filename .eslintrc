@@ -1,0 +1,67 @@
+{
+  "extends": "@react-native-community",
+  "parser": "babel-eslint",
+  "rules": {
+    "no-unused-vars": [
+      1,
+      {
+        "argsIgnorePattern": "res|next|stage|^err|on|config"
+      }
+    ],
+    "arrow-body-style": [2, "as-needed"],
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
+    "no-unused-expressions": [
+      1, {
+        "allowTaggedTemplates": true
+      }
+    ],
+    "no-console": 0,
+    "no-use-before-define": 0,
+    "no-underscore-dangle": 0,
+    "comma-dangle": 0,
+    "arrow-parens": 0,
+    "linebreak-style": 0,
+    "consistent-return": 0,
+    "import": 0,
+    "object-curly-newline": 0,
+    "func-names": 0,
+    "space-before-function-paren": 0,
+    "react/no-danger": 0,
+    "react/display-name": 1,
+    "react/react-in-jsx-scope": 0,
+    "react/forbid-prop-types": 1,
+    "react/prop-types": 0,
+    "react/prefer-stateless-function": 1,
+    "react/no-unescaped-entities": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "quotes": [
+      2,
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "indent": ["error", 2, {"SwitchCase": 1}],
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "semi": true,
+        "singleQuote": true,
+        "printWidth": 120
+      }
+    ],
+  }
+}
