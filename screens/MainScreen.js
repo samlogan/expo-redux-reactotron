@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, StyleSheet, StatusBar, Text } from 'react-native';
+import { View, StyleSheet, StatusBar, Text, Button } from 'react-native';
 import { getPosts } from '../actions/posts';
 
 const styles = StyleSheet.create({
@@ -16,14 +16,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const MainScreen = () => {
+const MainScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  const posts = useSelector(state => state.posts);
+  const posts = useSelector((state) => state.posts);
 
   useEffect(() => {
     dispatch(getPosts());
     console.log('Example console log from MainScreen.js');
-  }, []);
+  }, [dispatch]);
 
   const { items } = posts;
 
@@ -33,12 +33,13 @@ const MainScreen = () => {
       <Text style={styles.textStyle}>Edit screens/MainScreen.js to get started.</Text>
       <Text style={styles.textStyle}>Using Redux Hooks to fetch dummy posts:</Text>
       <View>
-        {items.map(post => (
+        {items.map((post) => (
           <Text key={post} style={styles.textStyle}>
             {post}
           </Text>
         ))}
       </View>
+      <Button title="Go to Register" onPress={() => navigation.navigate('Register')} />
     </View>
   );
 };

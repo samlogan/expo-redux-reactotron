@@ -1,21 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { NativeModules } from 'react-native';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
+import rootReducer from './reducers';
+import Stack from './navigators/Stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+  NativeModules.DevSettings.setIsDebuggingRemotely(true);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer, composeEnhancer(applyMiddleware(ReduxThunk)));
+
+const App = () => {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+    console.disableYellowBox = true;
+
+    const fetchFonts = async () => {
+      await Font.loadAsync({
+        bodyfont: require('./assets/fonts/Roboto-Regular.ttf'),
+        headerfont: require('./assets/fonts/Roboto-Bold.ttf'),
+      });
+      setFontLoaded(true);
+    };
+
+    fetchFonts();
+  }, []);
+
+  if (!fontLoaded) {
+    return <AppLoading />;
+  }
+
+  return (
+    <Provider store={store}>
+      <Stack />
+    </Provider>
+  );
+};
+
+export default App;
