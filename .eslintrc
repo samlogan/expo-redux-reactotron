@@ -1,6 +1,9 @@
 {
   "extends": "@react-native-community",
   "parser": "babel-eslint",
+  "plugins": [
+    "graphql"
+  ],
   "rules": {
     "no-unused-vars": [
       1,

@@ -4,7 +4,10 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import { AppLoading } from 'expo';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks';
 import * as Font from 'expo-font';
+import client from './apollo';
 import rootReducer from './reducers';
 import Stack from './navigators/Stack';
 
@@ -39,9 +42,13 @@ const App = () => {
   }
 
   return (
-    <Provider store={store}>
-      <Stack />
-    </Provider>
+    <ApolloProvider client={client}>
+      <ApolloHooksProvider client={client}>
+        <Provider store={store}>
+          <Stack />
+        </Provider>
+      </ApolloHooksProvider>
+    </ApolloProvider>
   );
 };
 
