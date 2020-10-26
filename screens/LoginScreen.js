@@ -53,20 +53,21 @@ const LoginScreen = ({ navigation }) => {
   return (
     <Formik {...formProps}>
       {({ handleChange, handleBlur, handleSubmit, values }) => (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 20 }}>
           <Input
             onChangeText={handleChange('username')}
             onBlur={handleBlur('username')}
             value={values.username}
-            placeholder="username"
+            placeholder="Username"
             textContentType="username"
           />
           <Input
             onChangeText={handleChange('password')}
             onBlur={handleBlur('password')}
             value={values.password}
-            placeholder="password"
+            placeholder="Password"
             textContentType="password"
+            secureTextEntry={true}
           />
           <Button onPress={handleSubmit} title="submit" />
           <Button title="Go back" onPress={() => navigation.goBack()} />
