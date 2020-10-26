@@ -1,5 +1,4 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
 import { View, Text, Button } from 'react-native';
 
 const RegisterScreen = ({ navigation }) => (
